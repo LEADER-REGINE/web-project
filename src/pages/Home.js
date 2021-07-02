@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import Comments from "./Comments";
 var uuid = require("uuid");
 export default function Home() {
   const user = firebase.auth().currentUser;
@@ -22,7 +21,7 @@ export default function Home() {
   const userInput = (prop) => (e) => {
     setPayload({ ...payload, [prop]: e.target.value });
   };
-  const [comment, setComment] = useState("");
+
 
   //states
 
@@ -77,19 +76,7 @@ export default function Home() {
     });
   };
 
-  const addComment = (docId) => {
-    /*     var commentsRef = db
-      .collection("posts")
-      .doc(docId)
-      .collection("commentsCollection");
-    commentsRef
-      .add({
-        comment: comment,
-      })
-      .then((doc) => {}); */
 
-    
-  };
 
   useEffect(() => {
     const fetchPost = () => {
