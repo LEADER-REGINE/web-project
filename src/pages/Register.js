@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { TextField, Button } from '@material-ui/core';
 import "../components/css/Login.css";
 import * as Mui from "@material-ui/core";
 import * as Muicons from "@material-ui/icons";
 import firebase from "../utils/firebase";
+
+import image3 from '../images/image3.png';
 
 export default function Register() {
   const [payload, setPayload] = useState({
@@ -37,7 +40,7 @@ export default function Register() {
               fname: payload.fname,
               lname: payload.lname,
             })
-            .then((docRef) => {})
+            .then((docRef) => { })
             .catch((error) => {
               console.error("Error adding document: ", error);
             });
@@ -49,7 +52,7 @@ export default function Register() {
     }
   };
 
-  return (
+  /*return (
     <div className="login-card">
       <Mui.Container maxWidth="xs">
         <Mui.Card>
@@ -123,5 +126,85 @@ export default function Register() {
         </Mui.Card>
       </Mui.Container>
     </div>
-  );
+  );*/
+
+  return (
+    <div className="login-container">
+      <div className="login-item">
+        <div className="login-left">
+          <img src={image3} className="image3" />
+        </div>
+        <div className="login-right">
+          <form className="login-form" noValidate autoComplete="off">
+            <h1>Register</h1>
+            <div className="login-name">
+
+              <div id="fname">
+                <TextField
+                  id="outlined-basic"
+                  label="First Name"
+                  variant="outlined"
+                  type="text"
+                  name="fname"
+                  onChange={userInput("fname")}
+                  value={payload.fname}
+                  style={{ width: '100%' }} />
+              </div>
+
+              <div id="lname">
+                <TextField
+                  id="outlined-basic"
+                  type="text"
+                  label="Last Name"
+                  name="lname"
+                  onChange={userInput("lname")}
+                  value={payload.lname}
+                  variant="outlined"
+                  style={{ width: '100%' }} />
+              </div>
+
+            </div>
+            <div id="taena">
+              <TextField
+                id="outlined-basic"
+                type="text"
+                label="E-mail"
+                name="email"
+                onChange={userInput("email")}
+                value={payload.email}
+                variant="outlined"
+                style={{ width: '100%' }} />
+            </div>
+
+            <div id="taena">
+              <TextField
+                id="outlined-basic"
+                type="password"
+                label="Password"
+                name="password"
+                onChange={userInput("password")}
+                value={payload.password}
+                variant="outlined"
+                style={{ width: '100%' }} />
+            </div>
+
+            <div id="taena">
+              <TextField
+                type="password"
+                label="Confirm Password"
+                name="confirmpassword"
+                onChange={userInput("confirmpassword")}
+                value={payload.confirmpassword}
+                variant="outlined"
+                style={{ width: '100%' }} />
+            </div>
+
+            <div id="taena"><button onClick={register} className="reg-btn">Register</button></div>
+            <div id="taena"><button onClick={register} className="login-btn">Log In</button></div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  )
 }

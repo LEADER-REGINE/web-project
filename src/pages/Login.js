@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import firebase from "../utils/firebase";
+import { TextField, Button } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import "../components/css/Login.css";
 import * as Mui from "@material-ui/core";
 import * as Muicons from "@material-ui/icons";
+import image3 from '../images/image3.png';
+
+
+
 
 export default function Login() {
   const [payload, setPayload] = useState({
@@ -15,7 +20,7 @@ export default function Login() {
     setPayload({ ...payload, [prop]: e.target.value });
   };
 
-  
+
   const signin = (e) => {
     firebase
       .auth()
@@ -31,6 +36,7 @@ export default function Login() {
   };
 
   return (
+    /*
     <div className="login-card">
       <Mui.Container maxWidth="xs">
         <Mui.Card>
@@ -76,6 +82,65 @@ export default function Login() {
           </div>
         </Mui.Card>
       </Mui.Container>
+    </div>
+    */
+
+    <div className="login-container">
+      <div className="login-item">
+        <div className="login-left">
+          <img src={image3} className="image3" />
+        </div>
+        <div className="login-right">
+          <form className="login-form" noValidate autoComplete="off">
+            <h1>Login</h1>
+
+            <div id="taena">
+              <TextField id="outlined-basic"
+                type="text"
+                label="Email"
+                name="email"
+                onChange={userInput("email")}
+                value={payload.email}
+                variant="outlined"
+                style={{ width: '100%' }} />
+            </div>
+
+            <div id="taena">
+              <TextField id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                type="password"
+                name="password"
+                onChange={userInput("password")}
+                value={payload.password}
+                style={{ width: '100%' }} />
+            </div>
+            
+            <div id="taena">
+              <h6>Forgot password?</h6>
+            </div>
+
+            <div id="taena">
+              <button onClick={signin}
+                className="login-btn"
+                onClick={signin}>
+                Log In
+              </button>
+            </div>
+
+            <div id="taena">
+              <button onClick={signin}
+                className="reg-btn">
+                Register
+              </button>
+            </div>
+
+
+
+
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
