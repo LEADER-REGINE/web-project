@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
-import firebase from "../utils/firebase";
+import firebase, { storage } from "../utils/firebase";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-var uuid = require("uuid");
+import AddPost from "../components/AddPost";
+
 export default function Home() {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
-  const id = uuid.v4();
   var UID = user.uid;
+  const [url, setURL] = useState("");
   //states
-  const [payload, setPayload] = useState({
-    postBody: "",
-    heartCtr: 0,
-  });
+
   const [state, setstate] = useState({
     posts: [],
   });
   const [userdata, setuserdata] = useState({
     user: [],
   });
-  const userInput = (prop) => (e) => {
-    setPayload({ ...payload, [prop]: e.target.value });
-  };
-
-
   //states
 
   //references
@@ -30,7 +23,7 @@ export default function Home() {
   var postsRef = db.collection("posts");
   var userRef = db.collection("users").doc(UID);
   var batch = db.batch();
-  const timestamp = firebase.firestore.FieldValue.serverTimestamp;
+
   //references
 
   useEffect(() => {
@@ -43,26 +36,6 @@ export default function Home() {
     };
     fetchUser(); // eslint-disable-next-line
   }, []);
-  const createPost = (e) => {
-    userRef.get().then((doc) => {
-      let author = doc.data().fname + " " + doc.data().lname;
-      batch.set(usersRef.collection("postCollection").doc(id), {
-        postBody: payload.postBody,
-        heartCtr: payload.heartCtr,
-        createdAt: timestamp(),
-        postAuthor: author,
-        postID: id,
-      });
-      batch.set(postsRef.doc(id), {
-        postBody: payload.postBody,
-        heartCtr: payload.heartCtr,
-        createdAt: timestamp(),
-        postAuthor: author,
-        postID: id,
-      });
-      batch.commit().then(() => {});
-    });
-  };
 
   const heartPost = (docId) => {
     var postsRef = db.collection("posts").doc(docId);
@@ -75,8 +48,6 @@ export default function Home() {
       batch.commit().then(() => {});
     });
   };
-
-
 
   useEffect(() => {
     const fetchPost = () => {
@@ -91,20 +62,24 @@ export default function Home() {
     fetchPost(); // eslint-disable-next-line
   }, []);
 
+  /*   useEffect(() => {
+    const fetchImg = () => {
+      postsRef.orderBy("createdAt", "desc").onSnapshot((doc) => {
+        let postList = [];
+        doc.forEach((post) => {
+          postList.push(post.data());
+        });
+        setstate({ posts: postList });
+      });
+    };
+    fetchImg(); // eslint-disable-next-line
+  }, []); */
+
   return (
     <div>
       <div>
         <div>
-          <input
-            type="text"
-            label="Body"
-            name="postBody"
-            onChange={userInput("postBody")}
-            value={payload.postBody}
-          ></input>
-        </div>
-        <div>
-          <button onClick={createPost}>Add Post</button>
+          <AddPost></AddPost>
         </div>
       </div>
       <div>
@@ -122,6 +97,7 @@ export default function Home() {
             <h1>
               Content: <p>{states.postBody}</p>
             </h1>
+            <img src={states.img_path} alt="hello"></img>
             <h6>
               Posted by <p>{states.postAuthor}</p>
             </h6>

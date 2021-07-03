@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
+import AddPost from "../components/AddPost";
 var uuid = require("uuid");
 export default function Profile() {
   const user = firebase.auth().currentUser;
@@ -44,26 +45,6 @@ export default function Profile() {
     };
     fetchUser(); // eslint-disable-next-line
   }, []);
-  const createPost = (e) => {
-    userRef.get().then((doc) => {
-      let author = doc.data().fname + " " + doc.data().lname;
-      batch.set(usersRef.collection("postCollection").doc(id), {
-        postBody: payload.postBody,
-        heartCtr: payload.heartCtr,
-        createdAt: timestamp(),
-        postAuthor: author,
-        postID: id,
-      });
-      batch.set(postsRef.doc(id), {
-        postBody: payload.postBody,
-        heartCtr: payload.heartCtr,
-        createdAt: timestamp(),
-        postAuthor: author,
-        postID: id,
-      });
-      batch.commit().then(() => {});
-    });
-  };
 
   const heartPost = (docId) => {
     var postsRef = db.collection("posts").doc(docId);
@@ -124,16 +105,7 @@ export default function Profile() {
     <div>
       <div>
         <div>
-          <input
-            type="text"
-            label="Body"
-            name="postBody"
-            onChange={userInput("postBody")}
-            value={payload.postBody}
-          ></input>
-        </div>
-        <div>
-          <button onClick={createPost}>Add Post</button>
+          <AddPost></AddPost>
         </div>
       </div>
       <div>

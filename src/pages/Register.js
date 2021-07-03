@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { TextField, Button } from '@material-ui/core';
+import { TextField } from "@material-ui/core";
 import "../components/css/Login.css";
-import * as Mui from "@material-ui/core";
-import * as Muicons from "@material-ui/icons";
 import firebase from "../utils/firebase";
 
-import image3 from '../images/image3.png';
+import image3 from "../images/image3.png";
 
 export default function Register() {
   const [payload, setPayload] = useState({
@@ -40,7 +38,7 @@ export default function Register() {
               fname: payload.fname,
               lname: payload.lname,
             })
-            .then((docRef) => { })
+            .then((docRef) => {})
             .catch((error) => {
               console.error("Error adding document: ", error);
             });
@@ -138,7 +136,6 @@ export default function Register() {
           <form className="login-form" noValidate autoComplete="off">
             <h1>Register</h1>
             <div className="login-name">
-
               <div id="fname">
                 <TextField
                   id="outlined-basic"
@@ -148,7 +145,8 @@ export default function Register() {
                   name="fname"
                   onChange={userInput("fname")}
                   value={payload.fname}
-                  style={{ width: '100%' }} />
+                  style={{ width: "100%" }}
+                />
               </div>
 
               <div id="lname">
@@ -160,9 +158,9 @@ export default function Register() {
                   onChange={userInput("lname")}
                   value={payload.lname}
                   variant="outlined"
-                  style={{ width: '100%' }} />
+                  style={{ width: "100%" }}
+                />
               </div>
-
             </div>
             <div id="taena">
               <TextField
@@ -173,7 +171,8 @@ export default function Register() {
                 onChange={userInput("email")}
                 value={payload.email}
                 variant="outlined"
-                style={{ width: '100%' }} />
+                style={{ width: "100%" }}
+              />
             </div>
 
             <div id="taena">
@@ -185,7 +184,8 @@ export default function Register() {
                 onChange={userInput("password")}
                 value={payload.password}
                 variant="outlined"
-                style={{ width: '100%' }} />
+                style={{ width: "100%" }}
+              />
             </div>
 
             <div id="taena">
@@ -196,15 +196,23 @@ export default function Register() {
                 onChange={userInput("confirmpassword")}
                 value={payload.confirmpassword}
                 variant="outlined"
-                style={{ width: '100%' }} />
+                style={{ width: "100%" }}
+              />
             </div>
 
-            <div id="taena"><button onClick={register} className="reg-btn">Register</button></div>
-            <div id="taena"><button onClick={register} className="login-btn">Log In</button></div>
-
+            <div id="taena">
+              <button onClick={register} className="reg-btn">
+                Register
+              </button>
+            </div>
+            <div id="taena">
+              <button onClick={register} className="login-btn">
+                Log In
+              </button>
+            </div>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
