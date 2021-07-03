@@ -108,3 +108,12 @@
 #outlined-basic {
   
 }
+
+@media only screen and (max-width: 600px) {
+  .login-left {
+    display: none;
+  }
+
+  .login-right{
+    width: 100%;
+  }
