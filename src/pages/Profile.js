@@ -61,15 +61,18 @@ export default function Profile() {
   useEffect(() => {
     let isMounted = true;
     const fetchPost = () => {
-      postsRef.orderBy("createdAt", "desc").onSnapshot((doc) => {
-        if (isMounted) {
-          let postList = [];
-          doc.forEach((post) => {
-            postList.push(post.data());
-          });
-          setstate({ posts: postList });
-        }
-      });
+      userRef
+        .collection("postCollection")
+        .orderBy("createdAt", "desc")
+        .onSnapshot((doc) => {
+          if (isMounted) {
+            let postList = [];
+            doc.forEach((post) => {
+              postList.push(post.data());
+            });
+            setstate({ posts: postList });
+          }
+        });
     };
     fetchPost(); // eslint-disable-next-line
     return () => {
