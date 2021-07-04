@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase from "../utils/firebase";
 import { TextField, Button } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import "../components/css/Login.css";
 import * as Mui from "@material-ui/core";
 import * as Muicons from "@material-ui/icons";
@@ -127,7 +127,9 @@ export default function Login() {
             </div>
 
             <div id="taena">
-              <button className="reg-btn">Register</button>
+              <Link to="/register" className="btn btn-primary">
+                Sign up
+              </Link>
             </div>
           </div>
         </div>
