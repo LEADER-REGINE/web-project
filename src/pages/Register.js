@@ -11,6 +11,7 @@ export default function Register() {
     fname: "",
     lname: "",
     email: "",
+    gender: "",
     password: "",
     confirmpassword: "",
   });
@@ -37,6 +38,7 @@ export default function Register() {
             .set({
               fname: payload.fname,
               lname: payload.lname,
+              gender: payload.gender,
             })
             .then((docRef) => {})
             .catch((error) => {
@@ -133,7 +135,7 @@ export default function Register() {
           <img src={image3} className="image3" />
         </div>
         <div className="login-right">
-          <form className="login-form" noValidate autoComplete="off">
+          <div className="login-form" noValidate autoComplete="off">
             <h1>Register</h1>
             <div className="login-name">
               <div id="fname">
@@ -161,6 +163,11 @@ export default function Register() {
                   style={{ width: "100%" }}
                 />
               </div>
+            </div>
+            <div onChange={userInput("gender")} value={payload.gender}>
+              <input type="radio" value="Male" name="gender" /> Male
+              <input type="radio" value="Female" name="gender" /> Female
+              <input type="radio" value="Other" name="gender" /> Other
             </div>
             <div id="taena">
               <TextField
@@ -210,7 +217,7 @@ export default function Register() {
                 Log In
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

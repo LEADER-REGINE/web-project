@@ -7,7 +7,6 @@ export default function Home() {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
   var UID = user.uid;
-  const [url, setURL] = useState("");
   //states
 
   const [state, setstate] = useState({
