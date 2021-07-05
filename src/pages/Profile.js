@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
 import AddPost from "../components/AddPost";
+import { Link } from "react-router-dom";
 var uuid = require("uuid");
 export default function Profile() {
   const user = firebase.auth().currentUser;
@@ -14,6 +15,9 @@ export default function Profile() {
   });
   const [state, setstate] = useState({
     posts: [],
+  });
+  const [notifs, setnotifs] = useState({
+    notifs: [],
   });
   const [userdata, setuserdata] = useState({
     user: [],
@@ -31,6 +35,7 @@ export default function Profile() {
   var usersRef = db.collection("users").doc(UID);
   var postsRef = db.collection("posts");
   var userRef = db.collection("users").doc(UID);
+  var notifRef = db.collection("notifications").doc(UID).collection("notifs");
   var batch = db.batch();
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   //references
@@ -46,17 +51,18 @@ export default function Profile() {
     fetchUser(); // eslint-disable-next-line
   }, []);
 
-  const heartPost = (docId) => {
-    var postsRef = db.collection("posts").doc(docId);
-    postsRef.get().then((doc) => {
-      let heartcount = doc.data().heartCtr;
-      var newheart = heartcount + 1;
-      batch.update(postsRef, {
-        heartCtr: newheart,
+  useEffect(() => {
+    const fetchPost = () => {
+      postsRef.orderBy("createdAt", "desc").onSnapshot((doc) => {
+        let postList = [];
+        doc.forEach((post) => {
+          postList.push(post.data());
+        });
+        setstate({ posts: postList });
       });
-      batch.commit().then(() => {});
-    });
-  };
+    };
+    fetchPost(); // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -96,7 +102,18 @@ export default function Profile() {
     };
   }, []);
 
-  console.log(getData.postCount);
+  useEffect(() => {
+    const fetchNotification = () => {
+      notifRef.orderBy("createdAt", "desc").onSnapshot((doc) => {
+        let notifList = [];
+        doc.forEach((notif) => {
+          notifList.push(notif.data());
+        });
+        setnotifs({ notifs: notifList });
+      });
+    };
+    fetchNotification(); // eslint-disable-next-line
+  }, []);
 
   const deletePost = (docId) => {
     batch.delete(usersRef.collection("postCollection").doc(docId));
@@ -113,9 +130,12 @@ export default function Profile() {
       </div>
       <div>
         {userdata.user.map((user) => (
-          <h1 key={UID}>
-            Name: <p>{user.fname + " " + user.lname}</p>
-          </h1>
+          <div>
+            <h1 key={UID}>
+              Name: <p>{user.fname + " " + user.lname}</p>
+            </h1>
+            <Link to="/editprofile">Edit Profile</Link>
+          </div>
         ))}
       </div>
       <div>
@@ -127,18 +147,25 @@ export default function Profile() {
         {state.posts.map((states) => (
           <div key={states.postID}>
             <h1>
-              Body: <p>{states.postBody}</p>
+              <img src={states.img_path} alt="hello"></img>
+              Content: <p>{states.postBody}</p>
+              <h6>
+                Posted On: <p>{states.postedDate}</p>
+              </h6>
               <input
                 type="button"
                 value="Delete"
                 onClick={() => deletePost(states.postID)}
               ></input>
-              <input
-                type="button"
-                value="Heart"
-                onClick={() => heartPost(states.postID)}
-              ></input>
             </h1>
+          </div>
+        ))}
+      </div>
+      <div>
+        <h3>Notifications</h3>
+        {notifs.notifs.map((notif) => (
+          <div>
+            <h1>{notif.value}</h1>
           </div>
         ))}
       </div>

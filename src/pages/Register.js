@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import "../components/css/Login.css";
 import firebase from "../utils/firebase";
@@ -39,6 +39,7 @@ export default function Register() {
               fname: payload.fname,
               lname: payload.lname,
               gender: payload.gender,
+              uid: user.uid,
             })
             .then((docRef) => {})
             .catch((error) => {
@@ -216,6 +217,9 @@ export default function Register() {
               <button onClick={register} className="login-btn">
                 Log In
               </button>
+              <Link to="/login" className="btn btn-primary">
+                Sign up
+              </Link>
             </div>
           </div>
         </div>
