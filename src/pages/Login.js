@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import firebase from "../utils/firebase";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Link } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import "../components/css/Login.css";
 import * as Mui from "@material-ui/core";
@@ -84,7 +84,9 @@ export default function Login() {
     <div className="login-container">
       <div className="login-item">
         <div className="login-left">
-          <img src={image3} className="image3" />
+          <div className="image3-padding">
+            <img src={image3} className="image3" />
+          </div>
         </div>
         <div className="login-right">
           <div className="login-form">
@@ -127,7 +129,9 @@ export default function Login() {
             </div>
 
             <div id="taena">
-              <button className="reg-btn">Register</button>
+              <Link to="/register" className="reg-btn">
+                Sign up
+              </Link>
             </div>
           </div>
         </div>
