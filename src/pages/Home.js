@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import firebase, { storage } from "../utils/firebase";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import firebase from "../utils/firebase";
 import AddPost from "../components/AddPost";
-import ToggleButton from "../components/ToggleButton";
 import "../App.css";
 export default function Home() {
   const user = firebase.auth().currentUser;
