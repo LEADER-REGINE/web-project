@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import firebase, { storage } from "../utils/firebase";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import firebase from "../utils/firebase";
 import AddPost from "../components/AddPost";
-
+import "../App.css";
 export default function Home() {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
   var UID = user.uid;
   //states
-
   const [state, setstate] = useState({
     posts: [],
   });
@@ -21,8 +19,9 @@ export default function Home() {
   var usersRef = db.collection("users").doc(UID);
   var postsRef = db.collection("posts");
   var userRef = db.collection("users").doc(UID);
+  var notifRef = db.collection("notifications");
   var batch = db.batch();
-
+  const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   //references
 
   useEffect(() => {
@@ -38,13 +37,74 @@ export default function Home() {
 
   const heartPost = (docId) => {
     var postsRef = db.collection("posts").doc(docId);
-    postsRef.get().then((doc) => {
-      let heartcount = doc.data().heartCtr;
-      var newheart = heartcount + 1;
-      batch.update(postsRef, {
-        heartCtr: newheart,
-      });
-      batch.commit().then(() => {});
+    let date = new Date();
+    let likedDate = date.toLocaleString();
+    userRef.get().then((doc) => {
+      let user = doc.data().fname + " " + doc.data().lname;
+      let userid = doc.data().uid;
+      postsRef
+        .collection("hearts")
+        .doc(UID)
+        .get()
+        .then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            postsRef
+              .collection("hearts")
+              .doc(UID)
+              .delete()
+              .then(() => {
+                postsRef.get().then((doc) => {
+                  let heartcount = doc.data().heartCtr;
+                  var newheart = heartcount - 1;
+                  batch.set(
+                    postsRef,
+                    {
+                      heartCtr: newheart,
+                    },
+                    { merge: true }
+                  );
+                  batch.commit().then(() => {});
+                });
+              });
+          } else {
+            postsRef
+              .collection("hearts")
+              .doc(UID)
+              .set({
+                value: user + " likes this post!",
+                likedTime: likedDate,
+                createdAt: timestamp(),
+              })
+              .then(() => {
+                postsRef.get().then((doc) => {
+                  let useruid = doc.data().userID;
+                  notifRef
+                    .doc(useruid)
+                    .collection("notifs")
+                    .doc()
+                    .set({
+                      value: user + " loves your post!",
+                      likedTime: likedDate,
+                      createdAt: timestamp(),
+                    })
+                    .then(() => {
+                      postsRef.get().then((doc) => {
+                        let heartcount = doc.data().heartCtr;
+                        var newheart = heartcount + 1;
+                        batch.set(
+                          postsRef,
+                          {
+                            heartCtr: newheart,
+                          },
+                          { merge: true }
+                        );
+                        batch.commit().then(() => {});
+                      });
+                    });
+                });
+              });
+          }
+        });
     });
   };
 
@@ -61,19 +121,6 @@ export default function Home() {
     fetchPost(); // eslint-disable-next-line
   }, []);
 
-  /*   useEffect(() => {
-    const fetchImg = () => {
-      postsRef.orderBy("createdAt", "desc").onSnapshot((doc) => {
-        let postList = [];
-        doc.forEach((post) => {
-          postList.push(post.data());
-        });
-        setstate({ posts: postList });
-      });
-    };
-    fetchImg(); // eslint-disable-next-line
-  }, []); */
-
   return (
     <div>
       <div>
@@ -83,11 +130,10 @@ export default function Home() {
       </div>
       <div>
         {userdata.user.map((user) => (
-          <Router>
-            <h1 key={UID}>
-              Hello, <Link to="/profile">{user.fname + " " + user.lname}</Link>
-            </h1>
-          </Router>
+          <h1 key={UID}>
+            Hello,
+            <p>{user.fname + " " + user.lname}</p>
+          </h1>
         ))}
       </div>
       <div>
@@ -102,6 +148,9 @@ export default function Home() {
             </h6>
             <h6>
               Hearts: <p>{states.heartCtr}</p>
+            </h6>
+            <h6>
+              Posted On: <p>{states.postedDate}</p>
             </h6>
             <input
               type="button"

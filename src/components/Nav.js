@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
 import { Link, useHistory } from "react-router-dom";
 
 export default function Nav() {
+  const [values, setValues] = useState({
+    isAuthenticated: false,
+  });
   const history = useHistory();
   const logout = (e) => {
     firebase
@@ -15,6 +18,20 @@ export default function Nav() {
         // An error happened.
       });
   };
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        setValues({ isAuthenticated: true });
+        var x = document.getElementById("logout");
+        x.style.display = "inline";
+      } else {
+        setValues({ isAuthenticated: false });
+        var x = document.getElementById("logout");
+        x.style.display = "none";
+      }
+    });
+  }, []);
   return (
     <div>
       <nav>
@@ -26,7 +43,9 @@ export default function Nav() {
             <Link to="/home">Home</Link>
           </li>
           <li>
-            <Link onClick={logout}>Logout</Link>
+            <Link onClick={logout} id="logout">
+              Logout
+            </Link>
           </li>
         </ul>
       </nav>

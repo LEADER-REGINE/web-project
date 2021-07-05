@@ -31,6 +31,10 @@ export default function ImageUpload() {
 
   function handleUpload(e) {
     e.preventDefault();
+    let date = new Date();
+    let postedDate = date.toLocaleString();
+
+    console.log(postedDate);
     userRef.get().then((doc) => {
       let author = doc.data().fname + " " + doc.data().lname;
       batch.set(usersRef.collection("postCollection").doc(id), {
@@ -39,6 +43,8 @@ export default function ImageUpload() {
         createdAt: timestamp(),
         postAuthor: author,
         postID: id,
+        postedDate: postedDate,
+        userID: UID,
       });
       batch.set(postsRef.doc(id), {
         postBody: payload.postBody,
@@ -46,6 +52,8 @@ export default function ImageUpload() {
         createdAt: timestamp(),
         postAuthor: author,
         postID: id,
+        postedDate: postedDate,
+        userID: UID,
       });
       batch.commit().then(() => {
         const ref = storage.ref(`/images/${id}/${file.name}`);
@@ -84,7 +92,7 @@ export default function ImageUpload() {
           onChange={userInput("postBody")}
           value={payload.postBody}
         ></input>
-        <input type="file" onChange={handleChange} />
+        <input type="file" onChange={handleChange} accept="image/*" />
         <button disabled={!file}>upload to firebase</button>
       </form>
     </div>
