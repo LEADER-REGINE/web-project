@@ -84,7 +84,7 @@ export default function Login() {
     <div className="login-container">
       <div className="login-item">
         <div className="login-left">
-          <div className="image3-padding">
+          <div className="image3-container">
             <img src={image3} className="image3" />
           </div>
         </div>

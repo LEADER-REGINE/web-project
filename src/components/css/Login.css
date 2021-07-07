@@ -26,7 +26,7 @@
   text-align: center;
   line-height: 575px;
 }
-.image3-padding{
+.image3-container{
   padding-left: 30px;
   padding-right: 20px;
 }
@@ -78,6 +78,32 @@
   margin: 10px 30px;
 }
 
+#radio-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-p{
+  color: #c4c4c4;
+}
+
+#taena-alr{
+  margin: 10px 30px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn btn-primary{
+  text-decoration: none;
+  color: #3bd98a;
+}
+
+#taena-alr div{
+  display: flex;
+  
+}
+
 #taena h6 {
   text-align: right;
   font-weight: 300;
@@ -104,7 +130,7 @@
 
  
 .reg-btn {
-  background-color: white;
+  background-color: #3BD98A;
   color: black;
   border: 2px solid green;
   

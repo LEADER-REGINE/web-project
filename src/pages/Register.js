@@ -41,7 +41,7 @@ export default function Register() {
               gender: payload.gender,
               uid: user.uid,
             })
-            .then((docRef) => {})
+            .then((docRef) => { })
             .catch((error) => {
               console.error("Error adding document: ", error);
             });
@@ -133,7 +133,9 @@ export default function Register() {
     <div className="login-container">
       <div className="login-item">
         <div className="login-left">
-          <img src={image3} className="image3" />
+          <div className="image3-container">
+            <img src={image3} className="image3" />
+          </div>
         </div>
         <div className="login-right">
           <div className="login-form" noValidate autoComplete="off">
@@ -165,10 +167,13 @@ export default function Register() {
                 />
               </div>
             </div>
-            <div onChange={userInput("gender")} value={payload.gender}>
-              <input type="radio" value="Male" name="gender" /> Male
-              <input type="radio" value="Female" name="gender" /> Female
-              <input type="radio" value="Other" name="gender" /> Other
+            <div id="taena">
+              <p className="login-p">Gender</p>
+              <div onChange={userInput("gender")} value={payload.gender} id="radio-container">
+                <div><input type="radio" value="Male" name="gender" /> Male</div>
+                <div><input type="radio" value="Female" name="gender" /> Female</div>
+                <div><input type="radio" value="Other" name="gender" /> Other</div>
+              </div>
             </div>
             <div id="taena">
               <TextField
@@ -213,13 +218,14 @@ export default function Register() {
                 Register
               </button>
             </div>
-            <div id="taena">
-              <button onClick={register} className="login-btn">
-                Log In
-              </button>
-              <Link to="/login" className="btn btn-primary">
-                Sign up
-              </Link>
+            <div id="taena-alr">
+              <div>
+                <p className="login-p">Already have an account? </p>
+
+                <Link to="/login" className="btn btn-primary">
+                  Log in
+                </Link>
+              </div>
             </div>
           </div>
         </div>
