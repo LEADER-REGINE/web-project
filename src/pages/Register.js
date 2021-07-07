@@ -14,6 +14,8 @@ export default function Register() {
     gender: "",
     password: "",
     confirmpassword: "",
+    profilePic:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhZNvTWjTSpH6CCYzLPxYkagOsGEZSrk5GMw&usqp=CAU",
   });
 
   const userInput = (prop) => (e) => {
@@ -40,8 +42,9 @@ export default function Register() {
               lname: payload.lname,
               gender: payload.gender,
               uid: user.uid,
+              profilePic: payload.profilePic,
             })
-            .then((docRef) => { })
+            .then((docRef) => {})
             .catch((error) => {
               console.error("Error adding document: ", error);
             });
@@ -169,10 +172,20 @@ export default function Register() {
             </div>
             <div id="taena">
               <p className="login-p">Gender</p>
-              <div onChange={userInput("gender")} value={payload.gender} id="radio-container">
-                <div><input type="radio" value="Male" name="gender" /> Male</div>
-                <div><input type="radio" value="Female" name="gender" /> Female</div>
-                <div><input type="radio" value="Other" name="gender" /> Other</div>
+              <div
+                onChange={userInput("gender")}
+                value={payload.gender}
+                id="radio-container"
+              >
+                <div>
+                  <input type="radio" value="Male" name="gender" /> Male
+                </div>
+                <div>
+                  <input type="radio" value="Female" name="gender" /> Female
+                </div>
+                <div>
+                  <input type="radio" value="Other" name="gender" /> Other
+                </div>
               </div>
             </div>
             <div id="taena">

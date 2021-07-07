@@ -37,6 +37,7 @@ export default function ImageUpload() {
     console.log(postedDate);
     userRef.get().then((doc) => {
       let author = doc.data().fname + " " + doc.data().lname;
+      let profilePic = doc.data().profilePic;
       batch.set(usersRef.collection("postCollection").doc(id), {
         postBody: payload.postBody,
         heartCtr: payload.heartCtr,
@@ -45,6 +46,7 @@ export default function ImageUpload() {
         postID: id,
         postedDate: postedDate,
         userID: UID,
+        profilePic: profilePic,
       });
       batch.set(postsRef.doc(id), {
         postBody: payload.postBody,
@@ -54,6 +56,7 @@ export default function ImageUpload() {
         postID: id,
         postedDate: postedDate,
         userID: UID,
+        profilePic: profilePic,
       });
       batch.commit().then(() => {
         const ref = storage.ref(`/images/${id}/${file.name}`);

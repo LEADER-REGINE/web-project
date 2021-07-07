@@ -15,10 +15,6 @@ export default function Home() {
   //puso
   const [isClick, setClick] = useState(false);
 
-
-
-
-
   //states
   const [state, setstate] = useState({
     posts: [],
@@ -77,7 +73,7 @@ export default function Home() {
                     },
                     { merge: true }
                   );
-                  batch.commit().then(() => { });
+                  batch.commit().then(() => {});
                 });
               });
           } else {
@@ -112,7 +108,7 @@ export default function Home() {
                           },
                           { merge: true }
                         );
-                        batch.commit().then(() => { });
+                        batch.commit().then(() => {});
                       });
                     });
                 });
@@ -157,14 +153,10 @@ export default function Home() {
           <div key={states.postID} className="home-post">
             <div className="post-topp">
               <div className="post-top">
-                <img src={pansamantala} className="haha" />
+                <img src={states.profilePic} className="haha" />
                 <div>
-                  <h4>
-                    {states.postAuthor}
-                  </h4>
-                  <h6>
-                    {states.postedDate}
-                  </h6>
+                  <h4>{states.postAuthor}</h4>
+                  <h6>{states.postedDate}</h6>
                 </div>
               </div>
               <p className="post-status">{states.postBody}</p>
@@ -173,17 +165,18 @@ export default function Home() {
               </div>
             </div>
             <div className="post-bot">
+              <div className="puso-ctr">{states.heartCtr}</div>
 
-              
-                <div className="puso-ctr">
-                  {states.heartCtr}
-                </div>
-
-                <div className="puso">
-                  <Heart value="Heart" isClick={isClick} onClick={() => { heartPost(states.postID); setClick(!isClick) }} />
-                </div>
-              
-
+              <div className="puso">
+                <Heart
+                  value="Heart"
+                  isClick={isClick}
+                  onClick={() => {
+                    heartPost(states.postID);
+                    setClick(!isClick);
+                  }}
+                />
+              </div>
             </div>
           </div>
         ))}

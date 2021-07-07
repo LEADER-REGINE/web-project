@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
+import EditProfile from "./pages/EditProfile";
 import PublicRoute from "./utils/PublicRoute";
 import PrivateRoute from "./utils/PrivateRoute";
 import firebase from "./utils/firebase";
-import Nav from "./components/Nav"
+import Nav from "./components/Nav";
 
 function App() {
   const [values, setValues] = useState({
@@ -21,9 +19,9 @@ function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        setValues({ isAuthenticated: true});
+        setValues({ isAuthenticated: true });
       } else {
-        setValues({ isAuthenticated: false});
+        setValues({ isAuthenticated: false });
       }
     });
   }, []);
@@ -54,6 +52,11 @@ function App() {
           isAuthenticated={values.isAuthenticated}
           component={Profile}
           path="/profile"
+        />
+        <PrivateRoute
+          isAuthenticated={values.isAuthenticated}
+          component={EditProfile}
+          path="/editprofile"
         />
       </Switch>
     </Router>
