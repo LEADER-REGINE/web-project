@@ -10,8 +10,8 @@ export default function ImageUpload() {
   const [url, setURL] = useState("");
   const history = useHistory();
   const [payload, setPayload] = useState({
-    postBody: "",
-    heartCtr: 0,
+    fname: "",
+    lname: "",
   });
 
   function handleChange(e) {
