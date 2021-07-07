@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
 import { Link, useHistory } from "react-router-dom";
 
-export default function Nav() {
+export default function Nav() {// eslint-disable-next-line
   const [values, setValues] = useState({
     isAuthenticated: false,
   });
@@ -23,11 +23,11 @@ export default function Nav() {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         setValues({ isAuthenticated: true });
-        var x = document.getElementById("logout");
+        let x = document.getElementById("logout");
         x.style.display = "inline";
       } else {
         setValues({ isAuthenticated: false });
-        var x = document.getElementById("logout");
+        let x = document.getElementById("logout");
         x.style.display = "none";
       }
     });

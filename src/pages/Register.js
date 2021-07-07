@@ -22,7 +22,7 @@ export default function Register() {
     setPayload({ ...payload, [prop]: e.target.value });
   };
 
-  const db = firebase.firestore();
+  const db = firebase.firestore(); // eslint-disable-next-line
   const history = useHistory();
   const register = (e) => {
     if (payload.password !== payload.confirmpassword) {
@@ -137,7 +137,7 @@ export default function Register() {
       <div className="login-item">
         <div className="login-left">
           <div className="image3-container">
-            <img src={image3} className="image3" />
+            <img src={image3} alt="" className="image3" />
           </div>
         </div>
         <div className="login-right">

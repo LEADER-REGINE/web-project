@@ -28,6 +28,7 @@ function App() {
 
   return (
     <Router>
+      <title>Twatter</title>
       <Nav></Nav>
       <Switch>
         <PublicRoute path="/" component={Landing} restricted={true} exact />

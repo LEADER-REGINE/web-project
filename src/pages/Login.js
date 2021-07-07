@@ -3,8 +3,6 @@ import firebase from "../utils/firebase";
 import { TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "../components/css/Login.css";
-import * as Mui from "@material-ui/core";
-import * as Muicons from "@material-ui/icons";
 import image3 from "../images/image3.png";
 
 export default function Login() {
@@ -85,7 +83,7 @@ export default function Login() {
       <div className="login-item">
         <div className="login-left">
           <div className="image3-container">
-            <img src={image3} className="image3" />
+            <img src={image3} alt="background" className="image3" />
           </div>
         </div>
         <div className="login-right">

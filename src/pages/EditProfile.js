@@ -6,7 +6,7 @@ export default function ImageUpload() {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
   var UID = user.uid;
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null); // eslint-disable-next-line
   const [url, setURL] = useState("");
   const history = useHistory();
   const [payload, setPayload] = useState({

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import firebase from "../utils/firebase";
+import React from "react";
 import { Route, Link } from "react-router-dom";
 
 export default function Landing() {
