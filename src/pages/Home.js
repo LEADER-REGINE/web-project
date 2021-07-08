@@ -5,7 +5,6 @@ import "../components/css/Home.css";
 
 import Heart from "react-animated-heart"; //puso
 
-import pansamantala from "../images/pansamantala.png";
 
 export default function Home() {
   const user = firebase.auth().currentUser;
@@ -26,7 +25,6 @@ export default function Home() {
   //states
 
   //references
-  var usersRef = db.collection("users").doc(UID);
   var postsRef = db.collection("posts");
   var userRef = db.collection("users").doc(UID);
   var notifRef = db.collection("notifications");
@@ -51,7 +49,7 @@ export default function Home() {
     let likedDate = date.toLocaleString();
     userRef.get().then((doc) => {
       let user = doc.data().fname + " " + doc.data().lname;
-      let userid = doc.data().uid;
+      
       postsRef
         .collection("hearts")
         .doc(UID)

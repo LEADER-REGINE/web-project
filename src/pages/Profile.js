@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 var uuid = require("uuid");
 export default function Profile() {
   const user = firebase.auth().currentUser;
-  const db = firebase.firestore();
+  const db = firebase.firestore(); // eslint-disable-next-line
   const id = uuid.v4();
   var UID = user.uid;
   //states
@@ -25,7 +25,7 @@ export default function Profile() {
   });
   const [getData, setGetdata] = useState({
     postCount: "",
-  });
+  }); // eslint-disable-next-line
   const userInput = (prop) => (e) => {
     setPayload({ ...payload, [prop]: e.target.value });
   };
@@ -36,7 +36,7 @@ export default function Profile() {
   var postsRef = db.collection("posts");
   var userRef = db.collection("users").doc(UID);
   var notifRef = db.collection("notifications").doc(UID).collection("notifs");
-  var batch = db.batch();
+  var batch = db.batch(); // eslint-disable-next-line
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   //references
 
@@ -83,7 +83,7 @@ export default function Profile() {
     fetchPost(); // eslint-disable-next-line
     return () => {
       isMounted = false;
-    };
+    }; // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function Profile() {
     fetchData(); // eslint-disable-next-line
     return () => {
       isMounted = false;
-    };
+    }; // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

@@ -37,7 +37,7 @@ export default function ImageUpload() {
     let date = new Date();
     let postedDate = date.toLocaleString();
 
-    console.log(postedDate);
+    console.log(url);
     userRef.get().then((doc) => {
       let author = doc.data().fname + " " + doc.data().lname;
       let profilePic = doc.data().profilePic;
