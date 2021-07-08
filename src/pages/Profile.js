@@ -118,16 +118,11 @@ export default function Profile() {
   const deletePost = (docId) => {
     batch.delete(usersRef.collection("postCollection").doc(docId));
     batch.delete(postsRef.doc(docId));
-    batch.commit().then(() => {});
+    batch.commit().then(() => { });
   };
 
   return (
     <div>
-      <div>
-        <div>
-          <AddPost></AddPost>
-        </div>
-      </div>
       <div>
         {userdata.user.map((user) => (
           <div>

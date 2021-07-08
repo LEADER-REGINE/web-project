@@ -1,0 +1,7 @@
+nav ul li .aaa{
+    
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+}
