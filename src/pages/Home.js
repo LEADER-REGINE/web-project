@@ -5,7 +5,6 @@ import "../components/css/Home.css";
 
 import Heart from "react-animated-heart"; //puso
 
-
 export default function Home() {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
@@ -21,6 +20,19 @@ export default function Home() {
   const [userdata, setuserdata] = useState({
     user: [],
   });
+
+  const [payload, setPayload] = useState({
+    comment: "",
+    uid: "",
+  });
+
+  const [comments, setComments] = useState({
+    commentsList: [],
+  });
+
+  const userInput = (prop) => (e) => {
+    setPayload({ ...payload, [prop]: e.target.value });
+  };
 
   //states
 
@@ -43,13 +55,24 @@ export default function Home() {
     fetchUser(); // eslint-disable-next-line
   }, []);
 
+  const addComment = (docId) => {
+    userRef.get().then((doc) => {
+      let author = doc.data().fname + " " + doc.data().lname;
+      postsRef.doc(docId).collection("commentCollection").add({
+        comment: payload.comment,
+        uid: UID,
+        author: author,
+      });
+    });
+  };
+
   const heartPost = (docId) => {
     var postsRef = db.collection("posts").doc(docId);
     let date = new Date();
     let likedDate = date.toLocaleString();
     userRef.get().then((doc) => {
       let user = doc.data().fname + " " + doc.data().lname;
-      
+
       postsRef
         .collection("hearts")
         .doc(UID)
@@ -168,12 +191,24 @@ export default function Home() {
               <div className="puso">
                 <Heart
                   value="Heart"
-                  isClick={isClick}
+                  isclick={isClick}
                   onClick={() => {
                     heartPost(states.postID);
                     setClick(!isClick);
                   }}
                 />
+              </div>
+              <div>
+                <textarea
+                  type="text"
+                  label="Comment"
+                  name="comment"
+                  onChange={userInput("comment")}
+                  value={payload.comment}
+                ></textarea>
+                <button type="button" onClick={() => addComment(states.postID)}>
+                  Comment
+                </button>
               </div>
             </div>
           </div>
