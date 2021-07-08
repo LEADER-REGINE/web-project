@@ -19,6 +19,7 @@
   background-color: #fff;
   border-radius: 20px;
   display: flex;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.19);
 }
 
 .login-left {

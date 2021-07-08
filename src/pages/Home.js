@@ -153,7 +153,7 @@ export default function Home() {
           <div key={states.postID} className="home-post">
             <div className="post-topp">
               <div className="post-top">
-                <img src={states.profilePic} className="haha" />
+                <img src={states.profilePic} className="post-profilepic" />
                 <div>
                   <h4>{states.postAuthor}</h4>
                   <h6>{states.postedDate}</h6>
