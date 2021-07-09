@@ -26,10 +26,6 @@ export default function Home() {
     uid: "",
   });
 
-  const [comments, setComments] = useState({
-    commentsList: [],
-  });
-
   const userInput = (prop) => (e) => {
     setPayload({ ...payload, [prop]: e.target.value });
   };
@@ -55,16 +51,7 @@ export default function Home() {
     fetchUser(); // eslint-disable-next-line
   }, []);
 
-  const addComment = (docId) => {
-    userRef.get().then((doc) => {
-      let author = doc.data().fname + " " + doc.data().lname;
-      postsRef.doc(docId).collection("commentCollection").add({
-        comment: payload.comment,
-        uid: UID,
-        author: author,
-      });
-    });
-  };
+
 
   const heartPost = (docId) => {
     var postsRef = db.collection("posts").doc(docId);
@@ -197,18 +184,6 @@ export default function Home() {
                     setClick(!isClick);
                   }}
                 />
-              </div>
-              <div>
-                <textarea
-                  type="text"
-                  label="Comment"
-                  name="comment"
-                  onChange={userInput("comment")}
-                  value={payload.comment}
-                ></textarea>
-                <button type="button" onClick={() => addComment(states.postID)}>
-                  Comment
-                </button>
               </div>
             </div>
           </div>
