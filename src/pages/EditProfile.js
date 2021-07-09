@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 
 import "../components/css/EditProfile.css";
+import Nav from "../components/Nav";
 
 export default function ImageUpload() {
   const user = firebase.auth().currentUser;
@@ -83,6 +84,10 @@ export default function ImageUpload() {
 
   return (
     <div className="EditProfile-container">
+      <div className="nav-container1">
+
+        <Nav></Nav>
+      </div>
       <div className="EditProfile-1">
         {userdata.user.map((user) => (
           <div>

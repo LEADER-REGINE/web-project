@@ -4,6 +4,7 @@ import AddPost from "../components/AddPost";
 import "../components/css/Home.css";
 
 import Heart from "react-animated-heart"; //puso
+import Nav from "../components/Nav";
 
 export default function Home() {
   const user = firebase.auth().currentUser;
@@ -141,6 +142,10 @@ export default function Home() {
 
   return (
     <div className="home-container">
+      <div className="nav-container1">
+
+        <Nav></Nav>
+      </div>
       <div className="home-left-container">
         <div>
           <div>
