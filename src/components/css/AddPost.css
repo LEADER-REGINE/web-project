@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .AddPost-container{
+    
+  }
+
+  .AddPost-container form{
+    width: 100%;
+    
+  }
+  
+
+  .AddPost-Input{
+    height: 350px;
+    width: 100%;
+    border: 1px solid #3BD98A;
+    border-radius: 20px 20px 0 0;
+    
+  }
+
+  .AddPost-bot{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #3BD98A;
+    border-radius: 0 0 20px 20px;
+    border-top: none;
+  }
+
+  .AddPost-bot button{
+    width: 137.93px;
+    height: 37.27px;
+    border-radius: 20px;
+    background-color:  #E6F2EE;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #3BD98A;
+
+    ;
+  }

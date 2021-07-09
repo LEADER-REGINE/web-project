@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
 import { Link, useHistory } from "react-router-dom";
+import "../components/css/Nav.css";
+
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 
 export default function Nav() {// eslint-disable-next-line
   const [values, setValues] = useState({
@@ -37,13 +42,20 @@ export default function Nav() {// eslint-disable-next-line
       <nav>
         <ul>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/profile" className="aaa">
+              <PersonOutlineOutlinedIcon />
+              Profile
+            </Link>
           </li>
           <li>
-            <Link to="/home">Home</Link>
+            <Link to="/home" className="aaa">
+              <HomeOutlinedIcon />
+              Home
+            </Link>
           </li>
           <li>
-            <Link onClick={logout} id="logout">
+            <Link onClick={logout} id="logout" className="aaa">
+              <ExitToAppOutlinedIcon />
               Logout
             </Link>
           </li>

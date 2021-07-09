@@ -5,7 +5,6 @@ import "../components/css/Home.css";
 
 import Heart from "react-animated-heart"; //puso
 
-
 export default function Home() {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
@@ -21,6 +20,15 @@ export default function Home() {
   const [userdata, setuserdata] = useState({
     user: [],
   });
+
+  const [payload, setPayload] = useState({
+    comment: "",
+    uid: "",
+  });
+
+  const userInput = (prop) => (e) => {
+    setPayload({ ...payload, [prop]: e.target.value });
+  };
 
   //states
 
@@ -43,13 +51,15 @@ export default function Home() {
     fetchUser(); // eslint-disable-next-line
   }, []);
 
+
+
   const heartPost = (docId) => {
     var postsRef = db.collection("posts").doc(docId);
     let date = new Date();
     let likedDate = date.toLocaleString();
     userRef.get().then((doc) => {
       let user = doc.data().fname + " " + doc.data().lname;
-      
+
       postsRef
         .collection("hearts")
         .doc(UID)
@@ -151,7 +161,7 @@ export default function Home() {
           <div key={states.postID} className="home-post">
             <div className="post-topp">
               <div className="post-top">
-                <img src={states.profilePic} alt="" className="haha" />
+                <img src={states.profilePic} className="post-profilepic" />
                 <div>
                   <h4>{states.postAuthor}</h4>
                   <h6>{states.postedDate}</h6>
@@ -168,7 +178,7 @@ export default function Home() {
               <div className="puso">
                 <Heart
                   value="Heart"
-                  isClick={isClick}
+                  isclick={isClick}
                   onClick={() => {
                     heartPost(states.postID);
                     setClick(!isClick);

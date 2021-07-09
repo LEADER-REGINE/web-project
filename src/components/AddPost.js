@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import firebase, { storage } from "../utils/firebase";
+import "../components/css/AddPost.css";
 var uuid = require("uuid");
+
+
 
 export default function ImageUpload() {
   const user = firebase.auth().currentUser;
@@ -77,7 +80,7 @@ export default function ImageUpload() {
                   .update({
                     img_path: url,
                   })
-                  .then(() => {});
+                  .then(() => { });
               });
           });
         });
@@ -86,17 +89,20 @@ export default function ImageUpload() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleUpload}>
+    <div className="AddPost-container">
+      <form onSubmit={handleUpload} >
         <input
+          className="AddPost-Input"
           type="text"
           label="Body"
           name="postBody"
           onChange={userInput("postBody")}
           value={payload.postBody}
         ></input>
-        <input type="file" onChange={handleChange} accept="image/*" />
-        <button disabled={!file}>upload to firebase</button>
+        <div className="AddPost-bot">
+          <input type="file" onChange={handleChange} accept="image/*" />
+          <button disabled={!file}>Post</button>
+        </div>
       </form>
     </div>
   );
