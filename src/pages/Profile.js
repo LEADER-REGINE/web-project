@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
 import { Link } from "react-router-dom";
 
-import Ellipse25 from "../images/Ellipse25.png";
-
 import "../components/css/Profile.css";
 
 var uuid = require("uuid");
@@ -15,23 +13,21 @@ export default function Profile() {
   const [state, setstate] = useState({
     posts: [],
   });
-  const [notifs, setnotifs] = useState({
-    notifs: [],
-  });
+
   const [userdata, setuserdata] = useState({
     user: [],
     postCount: "",
   });
   const [getData, setGetdata] = useState({
     postCount: "",
-  }); 
+  });
   //states
 
   //references
   var usersRef = db.collection("users").doc(UID);
   var postsRef = db.collection("posts");
   var userRef = db.collection("users").doc(UID);
-  var notifRef = db.collection("notifications").doc(UID).collection("notifs");
+
   var batch = db.batch();
   //references
 
@@ -97,23 +93,10 @@ export default function Profile() {
     }; // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    const fetchNotification = () => {
-      notifRef.orderBy("createdAt", "desc").onSnapshot((doc) => {
-        let notifList = [];
-        doc.forEach((notif) => {
-          notifList.push(notif.data());
-        });
-        setnotifs({ notifs: notifList });
-      });
-    };
-    fetchNotification(); // eslint-disable-next-line
-  }, []);
-
   const deletePost = (docId) => {
     batch.delete(usersRef.collection("postCollection").doc(docId));
     batch.delete(postsRef.doc(docId));
-    batch.commit().then(() => { });
+    batch.commit().then(() => {});
   };
 
   return (
@@ -122,8 +105,7 @@ export default function Profile() {
         <div>
           {userdata.user.map((user) => (
             <div className="profile-top">
-
-              <img src={Ellipse25} />
+              <img src={user.profilePic} className="EditProfile-img" />
 
               <div className="profile-top1">
                 <div className="profile-top2">
@@ -132,14 +114,15 @@ export default function Profile() {
                       <p>{user.fname + " " + user.lname}</p>
                     </h1>
                   </div>
-                  <Link to="/editprofile" className="profile-edit">Edit</Link>
+                  <Link to="/editprofile" className="profile-edit">
+                    Edit
+                  </Link>
                 </div>
                 <div className="profile-top3">
                   <h1>
                     <p>Posts: {getData.postCount}</p>
                   </h1>
                 </div>
-
               </div>
             </div>
           ))}
@@ -149,7 +132,6 @@ export default function Profile() {
           <h1 className="recent">Recent Posts</h1>
           {state.posts.map((states) => (
             <div key={states.postID} className="home-post">
-              
               <div className="post-topp">
                 <div className="post-top">
                   <img src={states.profilePic} className="post-profilepic" />
@@ -168,14 +150,6 @@ export default function Profile() {
                   <img src={states.img_path} alt="hello"></img>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div>
-          <h3>Notifications</h3>
-          {notifs.notifs.map((notif) => (
-            <div>
-              <h1>{notif.value}</h1>
             </div>
           ))}
         </div>

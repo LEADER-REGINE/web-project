@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
+import Notifications from "./pages/Notifications";
 import EditProfile from "./pages/EditProfile";
 import PublicRoute from "./utils/PublicRoute";
 import PrivateRoute from "./utils/PrivateRoute";
@@ -57,6 +58,11 @@ function App() {
           isAuthenticated={values.isAuthenticated}
           component={EditProfile}
           path="/editprofile"
+        />
+                <PrivateRoute
+          isAuthenticated={values.isAuthenticated}
+          component={Notifications}
+          path="/notifications"
         />
       </Switch>
     </Router>
