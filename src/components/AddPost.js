@@ -90,15 +90,19 @@ export default function ImageUpload() {
 
   return (
     <div className="AddPost-container">
-      <form onSubmit={handleUpload} >
-        <input
+      <form onSubmit={handleUpload} className="add-home-container">
+
+        <textarea
+          rows="4"
+          cols="50"
           className="AddPost-Input"
           type="text"
           label="Body"
           name="postBody"
           onChange={userInput("postBody")}
           value={payload.postBody}
-        ></input>
+        ></textarea>
+
         <div className="AddPost-bot">
           <input type="file" onChange={handleChange} accept="image/*" />
           <button disabled={!file}>Post</button>

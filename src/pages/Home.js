@@ -94,7 +94,7 @@ export default function Home() {
                     },
                     { merge: true }
                   );
-                  batch.commit().then(() => {});
+                  batch.commit().then(() => { });
                 });
               });
           } else {
@@ -129,7 +129,7 @@ export default function Home() {
                           },
                           { merge: true }
                         );
-                        batch.commit().then(() => {});
+                        batch.commit().then(() => { });
                       });
                     });
                 });
@@ -154,7 +154,7 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <div>
+      <div className="home-left-container">
         <div>
           <div>
             <AddPost></AddPost>
@@ -200,6 +200,8 @@ export default function Home() {
               </div>
               <div>
                 <textarea
+                  rows="1"
+                  cols="50"
                   type="text"
                   label="Comment"
                   name="comment"
