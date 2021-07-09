@@ -10,14 +10,19 @@
   }
 
   .AddPost-container form{
-    width: 100%;
-    
+    width: 400px;
+    margin: 30px auto;
   }
   
-
+  .add-home-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
   .AddPost-Input{
-    height: 350px;
-    width: 100%;
+    height: 300px;
+    width: 300px;
     border: 1px solid #3BD98A;
     border-radius: 20px 20px 0 0;
     
@@ -25,6 +30,7 @@
 
   .AddPost-bot{
     height: 60px;
+    width: 300px;
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import firebase, { storage } from "../utils/firebase";
 import { useHistory } from "react-router-dom";
+import { TextField } from "@material-ui/core";
+
+import "../components/css/EditProfile.css";
 
 export default function ImageUpload() {
   const user = firebase.auth().currentUser;
@@ -79,36 +82,49 @@ export default function ImageUpload() {
   }
 
   return (
-    <div>
-      <div>
-        <h4>Current Picture</h4>
+    <div className="EditProfile-container">
+      <div className="EditProfile-1">
         {userdata.user.map((user) => (
           <div>
-            <img src={user.profilePic} />
+            <img src={user.profilePic} className="EditProfile-img" />
           </div>
         ))}
+
+        <form onSubmit={updatePic}>
+          <input type="file" onChange={handleChange} accept="image/*" />
+          <button disabled={!file}>Upload</button>
+        </form>
       </div>
-      <form onSubmit={updatePic}>
-        <input type="file" onChange={handleChange} accept="image/*" />
-        <button disabled={!file}>Update Picture</button>
-      </form>
-      <form onSubmit={handleUpload}>
-        <input
-          type="text"
-          label="First name"
-          name="fname"
-          onChange={userInput("fname")}
-          value={payload.fname}
-        ></input>
-        <input
-          type="text"
-          label="Last Name"
-          name="lname"
-          onChange={userInput("lname")}
-          value={payload.lname}
-        ></input>
-        <button>Update Profile</button>
-      </form>
+      <div className="EditProfile-1">
+        <form onSubmit={handleUpload}>
+
+          <TextField
+            id="outlined-basic"
+            type="text"
+            label="First Name"
+            name="fname"
+            onChange={userInput("fname")}
+            value={payload.fname}
+            variant="outlined"
+            value={payload.fname}
+            style={{ width: "100%" }}
+          />
+
+          <TextField
+            id="outlined-basic"
+            type="text"
+            label="Last Name"
+            name="lname"
+            onChange={userInput("lname")}
+            value={payload.fname}
+            variant="outlined"
+            value={payload.lname}
+            style={{ width: "100%" }}
+          />
+
+          <button>Update Profile</button>
+        </form>
+      </div>
     </div>
   );
 }

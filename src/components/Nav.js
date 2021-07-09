@@ -38,24 +38,24 @@ export default function Nav() {// eslint-disable-next-line
     });
   }, []);
   return (
-    <div>
+    <div className="nav-container">
       <nav>
         <ul>
           <li>
             <Link to="/profile" className="aaa">
-              <PersonOutlineOutlinedIcon />
+              <PersonOutlineOutlinedIcon className="nav-icon"/>
               Profile
             </Link>
           </li>
           <li>
             <Link to="/home" className="aaa">
-              <HomeOutlinedIcon />
+              <HomeOutlinedIcon className="nav-icon"/>
               Home
             </Link>
           </li>
           <li>
-            <Link onClick={logout} id="logout" className="aaa">
-              <ExitToAppOutlinedIcon />
+            <Link onClick={logout} id="logout" >
+              <ExitToAppOutlinedIcon className="nav-icon"/>
               Logout
             </Link>
           </li>
