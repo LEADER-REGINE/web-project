@@ -42,6 +42,7 @@ export default function ImageUpload() {
     };
     fetchUser(); // eslint-disable-next-line
   }, []);
+
   function updatePic(e) {
     e.preventDefault();
     const ref = storage.ref(`/profile/images/${UID}/${file.name}`);
