@@ -2,6 +2,12 @@
     width: 150px;
     background-color: #3BD98A;
     border-radius: 20px;
+    border:none;
+}
+
+nav ul{
+    border: 1px solid #3BD98A;
+    border-radius: 20px;
 }
 
 nav ul li{
@@ -30,5 +36,11 @@ nav ul li{
 }
 
 .nav-icon{
-    
+    width: 100%;
+}
+
+nav ul li:hover, nav ul li:hover  .nav-icon{
+    background-color: #fff;
+    border-radius: 20px;
+    color: #3BD98A;
 }

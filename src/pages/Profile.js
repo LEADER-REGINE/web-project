@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
 import { Link } from "react-router-dom";
 
+import Ellipse25 from "../images/Ellipse25.png";
+import Nav from "../components/Nav";
+
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import "../components/css/Profile.css";
 
 var uuid = require("uuid");
@@ -100,57 +105,66 @@ export default function Profile() {
   };
 
   return (
+
     <div className="profile-container1">
+      <div className="nav-container1">
+
+        <Nav></Nav>
+      </div>
+
       <div className="profile-container">
+
         <div>
           {userdata.user.map((user) => (
             <div className="profile-top">
               <img src={user.profilePic} className="EditProfile-img" />
 
-              <div className="profile-top1">
-                <div className="profile-top2">
-                  <div>
-                    <h1 key={UID}>
-                      <p>{user.fname + " " + user.lname}</p>
+                <div className="profile-top1">
+                  <div className="profile-top2">
+                    <div>
+                      <h1 key={UID}>
+                        <p>{user.fname + " " + user.lname}</p>
+                      </h1>
+                    </div>
+                    <Link to="/editprofile" className="profile-edit">Edit</Link>
+                  </div>
+                  <div className="profile-top3">
+                    <h1>
+                      <p>Posts: {getData.postCount}</p>
                     </h1>
                   </div>
-                  <Link to="/editprofile" className="profile-edit">
-                    Edit
-                  </Link>
+                  
                 </div>
-                <div className="profile-top3">
-                  <h1>
-                    <p>Posts: {getData.postCount}</p>
-                  </h1>
-                </div>
+                
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="home-post-container">
-          <h1 className="recent">Recent Posts</h1>
-          {state.posts.map((states) => (
-            <div key={states.postID} className="home-post">
-              <div className="post-topp">
-                <div className="post-top">
-                  <img src={states.profilePic} className="post-profilepic" />
-                  <div>
-                    <h4>{states.postAuthor}</h4>
-                    <h6>{states.postedDate}</h6>
+          <div className="home-post-container">
+            <h1 className="recent">Recent Posts</h1>
+            {state.posts.map((states) => (
+              <div key={states.postID} className="home-post">
+
+                <div className="post-topp">
+                  <div className="post-top">
+                    <img src={states.profilePic} className="post-profilepic" />
+                    <div>
+                      <h4>{states.postAuthor}</h4>
+                      <h6>{states.postedDate}</h6>
+                    </div>
+                    
+                    <div
+                      onClick={() => deletePost(states.postID)} id="cursor"
+                    ><DeleteIcon></DeleteIcon></div>
                   </div>
-                  <input
-                    type="button"
-                    value="Delete"
-                    onClick={() => deletePost(states.postID)}
-                  ></input>
+                  <p className="post-status">{states.postBody}</p>
+                  <div className="post-image-container">
+                    <img src={states.img_path} alt="hello"></img>
+                  </div>
                 </div>
-                <p className="post-status">{states.postBody}</p>
-                <div className="post-image-container">
-                  <img src={states.img_path} alt="hello"></img>
-                </div>
+                
               </div>
-            </div>
+            
           ))}
         </div>
       </div>

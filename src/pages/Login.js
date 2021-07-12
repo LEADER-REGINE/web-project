@@ -125,13 +125,13 @@ export default function Login() {
             </div>
 
             <div id="taena">
-              <button className="login-btn" onClick={signin}>
+              <button className="login-btn" onClick={signin} id="cursor">
                 Log In
               </button>
             </div>
 
-            <div id="taena">
-              <Link to="/register" className="reg-btn">
+            <div id="taena1" >
+              <Link to="/register" >
                 Sign up
               </Link>
             </div>

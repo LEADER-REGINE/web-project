@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router>
-      <Nav></Nav>
+      
       <Switch>
         <PublicRoute path="/" component={Landing} restricted={true} exact />
         <PublicRoute

@@ -44,19 +44,19 @@ export default function Nav() {// eslint-disable-next-line
           <li>
             <Link to="/profile" className="aaa">
               <PersonOutlineOutlinedIcon className="nav-icon"/>
-              Profile
+               
             </Link>
           </li>
           <li>
             <Link to="/home" className="aaa">
               <HomeOutlinedIcon className="nav-icon"/>
-              Home
+               
             </Link>
           </li>
           <li>
             <Link onClick={logout} id="logout" >
               <ExitToAppOutlinedIcon className="nav-icon"/>
-              Logout
+               
             </Link>
           </li>
         </ul>
