@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../utils/firebase";
-import AddPost from "../components/AddPost";
 import { Link } from "react-router-dom";
 
 import Ellipse25 from "../images/Ellipse25.png";
 import Nav from "../components/Nav";
 
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import "../components/css/Profile.css";
 
@@ -13,38 +13,27 @@ var uuid = require("uuid");
 export default function Profile() {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore(); // eslint-disable-next-line
-  const id = uuid.v4();
   var UID = user.uid;
   //states
-  const [payload, setPayload] = useState({
-    postBody: "",
-    heartCtr: 0,
-  });
   const [state, setstate] = useState({
     posts: [],
   });
-  const [notifs, setnotifs] = useState({
-    notifs: [],
-  });
+
   const [userdata, setuserdata] = useState({
     user: [],
     postCount: "",
   });
   const [getData, setGetdata] = useState({
     postCount: "",
-  }); // eslint-disable-next-line
-  const userInput = (prop) => (e) => {
-    setPayload({ ...payload, [prop]: e.target.value });
-  };
+  });
   //states
 
   //references
   var usersRef = db.collection("users").doc(UID);
   var postsRef = db.collection("posts");
   var userRef = db.collection("users").doc(UID);
-  var notifRef = db.collection("notifications").doc(UID).collection("notifs");
-  var batch = db.batch(); // eslint-disable-next-line
-  const timestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+  var batch = db.batch();
   //references
 
   useEffect(() => {
@@ -109,23 +98,10 @@ export default function Profile() {
     }; // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    const fetchNotification = () => {
-      notifRef.orderBy("createdAt", "desc").onSnapshot((doc) => {
-        let notifList = [];
-        doc.forEach((notif) => {
-          notifList.push(notif.data());
-        });
-        setnotifs({ notifs: notifList });
-      });
-    };
-    fetchNotification(); // eslint-disable-next-line
-  }, []);
-
   const deletePost = (docId) => {
     batch.delete(usersRef.collection("postCollection").doc(docId));
     batch.delete(postsRef.doc(docId));
-    batch.commit().then(() => { });
+    batch.commit().then(() => {});
   };
 
   return (
@@ -139,11 +115,9 @@ export default function Profile() {
       <div className="profile-container">
 
         <div>
-          <div>
-            {userdata.user.map((user) => (
-              <div className="profile-top">
-
-                <img src={Ellipse25} />
+          {userdata.user.map((user) => (
+            <div className="profile-top">
+              <img src={user.profilePic} className="EditProfile-img" />
 
                 <div className="profile-top1">
                   <div className="profile-top2">
@@ -159,8 +133,9 @@ export default function Profile() {
                       <p>Posts: {getData.postCount}</p>
                     </h1>
                   </div>
-
+                  
                 </div>
+                
               </div>
             ))}
           </div>
@@ -177,28 +152,20 @@ export default function Profile() {
                       <h4>{states.postAuthor}</h4>
                       <h6>{states.postedDate}</h6>
                     </div>
-                    <input
-                      type="button"
-                      value="Delete"
-                      onClick={() => deletePost(states.postID)}
-                    ></input>
+                    
+                    <div
+                      onClick={() => deletePost(states.postID)} id="cursor"
+                    ><DeleteIcon></DeleteIcon></div>
                   </div>
                   <p className="post-status">{states.postBody}</p>
                   <div className="post-image-container">
                     <img src={states.img_path} alt="hello"></img>
                   </div>
                 </div>
+                
               </div>
-            ))}
-          </div>
-          <div>
-            <h3>Notifications</h3>
-            {notifs.notifs.map((notif) => (
-              <div>
-                <h1>{notif.value}</h1>
-              </div>
-            ))}
-          </div>
+            
+          ))}
         </div>
       </div>
     </div>

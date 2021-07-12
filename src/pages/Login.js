@@ -16,17 +16,21 @@ export default function Login() {
   };
 
   const signin = (e) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(payload.email, payload.password)
-      .then((userCredential) => {
-        // Signed in
-        // ...
-      })
-      .catch((error) => {
-        var errorMessage = error.message;
-        console.log(errorMessage);
-      });
+    if (!payload.email || !payload.password) {
+      alert("Make sure all fields are filled");
+    } else {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(payload.email, payload.password)
+        .then((userCredential) => {
+          // Signed in
+          // ...
+        })
+        .catch((error) => {
+          var errorMessage = error.message;
+          console.log(errorMessage);
+        });
+    }
   };
 
   return (
@@ -121,13 +125,13 @@ export default function Login() {
             </div>
 
             <div id="taena">
-              <button className="login-btn" onClick={signin}>
+              <button className="login-btn" onClick={signin} id="cursor">
                 Log In
               </button>
             </div>
 
-            <div id="taena">
-              <Link to="/register" className="reg-btn">
+            <div id="taena1" >
+              <Link to="/register" >
                 Sign up
               </Link>
             </div>

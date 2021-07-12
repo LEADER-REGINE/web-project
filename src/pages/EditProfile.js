@@ -77,6 +77,7 @@ export default function ImageUpload() {
         });
         batch.commit().then(() => {
           alert("profile update success");
+          history.push("/profile");
         });
       });
     }
@@ -84,10 +85,10 @@ export default function ImageUpload() {
 
   return (
     <div className="EditProfile-container">
-      <div className="nav-container1">
+      {/* <div className="nav-container1">
 
         <Nav></Nav>
-      </div>
+      </div> */}
       <div className="EditProfile-1">
         {userdata.user.map((user) => (
           <div>

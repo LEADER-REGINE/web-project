@@ -27,7 +27,13 @@ export default function Register() {
   const register = (e) => {
     if (payload.password !== payload.confirmpassword) {
       alert("Passwords doesn't match! Please try again");
-    } else if (payload.password === "" || payload.email === "") {
+    } else if (
+      !payload.password ||
+      !payload.email ||
+      !payload.gender ||
+      !payload.lname ||
+      !payload.fname
+    ) {
       alert("Please fill out all of the fields");
     } else {
       firebase
