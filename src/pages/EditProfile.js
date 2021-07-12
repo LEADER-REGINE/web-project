@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 
 import "../components/css/EditProfile.css";
-import Nav from "../components/Nav";
 
 export default function ImageUpload() {
   const user = firebase.auth().currentUser;
@@ -93,7 +92,7 @@ export default function ImageUpload() {
       <div className="EditProfile-1">
         {userdata.user.map((user) => (
           <div>
-            <img src={user.profilePic} className="EditProfile-img" />
+            <img src={user.profilePic} alt="Profile" className="EditProfile-img" />
           </div>
         ))}
 
@@ -104,7 +103,6 @@ export default function ImageUpload() {
       </div>
       <div className="EditProfile-1">
         <form onSubmit={handleUpload}>
-
           <TextField
             id="outlined-basic"
             type="text"
@@ -113,7 +111,6 @@ export default function ImageUpload() {
             onChange={userInput("fname")}
             value={payload.fname}
             variant="outlined"
-            value={payload.fname}
             style={{ width: "100%" }}
           />
 
@@ -123,7 +120,6 @@ export default function ImageUpload() {
             label="Last Name"
             name="lname"
             onChange={userInput("lname")}
-            value={payload.fname}
             variant="outlined"
             value={payload.lname}
             style={{ width: "100%" }}

@@ -26,7 +26,7 @@ export default function Home() {
     comment: "",
     uid: "",
   });
-
+  // eslint-disable-next-line
   const userInput = (prop) => (e) => {
     setPayload({ ...payload, [prop]: e.target.value });
   };
@@ -51,8 +51,6 @@ export default function Home() {
     };
     fetchUser(); // eslint-disable-next-line
   }, []);
-
-
 
   const heartPost = (docId) => {
     var postsRef = db.collection("posts").doc(docId);
@@ -82,7 +80,7 @@ export default function Home() {
                     },
                     { merge: true }
                   );
-                  batch.commit().then(() => { });
+                  batch.commit().then(() => {});
                 });
               });
           } else {
@@ -117,7 +115,7 @@ export default function Home() {
                           },
                           { merge: true }
                         );
-                        batch.commit().then(() => { });
+                        batch.commit().then(() => {});
                       });
                     });
                 });
@@ -143,7 +141,6 @@ export default function Home() {
   return (
     <div className="home-container">
       <div className="nav-container1">
-
         <Nav></Nav>
       </div>
       <div className="home-left-container">
@@ -166,7 +163,7 @@ export default function Home() {
           <div key={states.postID} className="home-post">
             <div className="post-topp">
               <div className="post-top">
-                <img src={states.profilePic} className="post-profilepic" />
+                <img src={states.profilePic} alt="Profile" className="post-profilepic" />
                 <div>
                   <h4>{states.postAuthor}</h4>
                   <h6>{states.postedDate}</h6>
@@ -174,7 +171,7 @@ export default function Home() {
               </div>
               <p className="post-status">{states.postBody}</p>
               <div className="post-image-container">
-                <img src={states.img_path} alt="hello"></img>
+                <img src={states.img_path} alt="postImg"></img>
               </div>
             </div>
             <div className="post-bot">

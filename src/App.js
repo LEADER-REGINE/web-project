@@ -10,7 +10,6 @@ import EditProfile from "./pages/EditProfile";
 import PublicRoute from "./utils/PublicRoute";
 import PrivateRoute from "./utils/PrivateRoute";
 import firebase from "./utils/firebase";
-import Nav from "./components/Nav";
 
 function App() {
   const [values, setValues] = useState({

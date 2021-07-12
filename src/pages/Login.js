@@ -34,55 +34,6 @@ export default function Login() {
   };
 
   return (
-    /*
-    <div className="login-card">
-      <Mui.Container maxWidth="xs">
-        <Mui.Card>
-          <div className="card-inside">
-            <div>
-              <Muicons.AccountBox style={{ fontSize: 58 }} />
-            </div>
-            <div>
-              <Mui.TextField
-                type="text"
-                label="E-mail"
-                name="email"
-                onChange={userInput("email")}
-                value={payload.email}
-              ></Mui.TextField>
-            </div>
-            <div>
-              <Mui.TextField
-                type="password"
-                label="Password"
-                name="password"
-                onChange={userInput("password")}
-                value={payload.password}
-              ></Mui.TextField>
-            </div>
-            <div>
-              <Mui.Button
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={signin}
-                className="login-btn"
-                startIcon={<Muicons.VpnKey />}
-              >
-                Login
-              </Mui.Button>
-            </div>
-            <div>
-              <h6>
-                Don't have an account yet? <a href="/register">Register Now</a>
-              </h6>
-            </div>
-          </div>
-        </Mui.Card>
-      </Mui.Container>
-    </div>
-    */
-
     <div className="login-container">
       <div className="login-item">
         <div className="login-left">
@@ -130,10 +81,8 @@ export default function Login() {
               </button>
             </div>
 
-            <div id="taena1" >
-              <Link to="/register" >
-                Sign up
-              </Link>
+            <div id="taena1">
+              <Link to="/register">Sign up</Link>
             </div>
           </div>
         </div>
