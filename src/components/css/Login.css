@@ -132,47 +132,10 @@
  
 }
 
-#taena1{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: pointer;
-}
-
-/* .reg-btn a{
+.login-right .reg-btn {
   background-color: #FFA1AC;
-  color: #fff;
-  width: 100% !important;
-  border: none;
-  height: 45px;
-  border-radius: 5px;
-  margin: 0 auto;
-}
  
-.reg-btn {
-  width: 85%;
-  
-  border:none;
-  
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  text-align: center;
-}  */
-
-#taena1{
-  height: 45px;
-  background-color: #FFA1AC;
-  margin: 10px 30px;
-  border-radius: 5px;
 }
-
-#taena1 a{
-  margin: 0 auto;
-  text-decoration: none;
-  color: #FFF;
-}
-
 
 #outlined-basic {
 }
@@ -184,5 +147,10 @@
 
   .login-right {
     width: 100%;
+  }
+
+  .hatdog{
+    display: flex;
+    flex-direction: column;
   }
 }
